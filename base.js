@@ -3,6 +3,7 @@ function $(_this) {
     return new Base(_this);
 }
 
+//基础库
 function Base(_this) {
     //创建数组用于保存获取的的节点和节点数组
     this.elements = [];
@@ -160,5 +161,22 @@ Base.prototype.hide = function () {
     for (var i = 0; i < this.elements.length; i ++) {
         this.elements[i].style.display = 'none';
     }
+    return this;
+};
+
+//设置居中
+Base.prototype.center = function (width, height) {
+    var top = (document.documentElement.clientHeight - 250) / 2;
+    var left = (document.documentElement.clientWidth - 350) / 2;
+    for (var i = 0; i < this.elements.length; i ++) {
+        this.elements[i].style.top = top + 'px';
+        this.elements[i].style.left = left + 'px';
+    }
+    return this;
+};
+
+//触发浏览器窗口事件
+Base.prototype.resize = function (func) {
+    window.onresize = func;
     return this;
 };

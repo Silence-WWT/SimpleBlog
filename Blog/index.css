@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: url("images/header_bg.png") repeat-x;
+    background: #ffffff url("images/header_bg.png") repeat-x;
     font-size: 14px;
     color: #333333;
 }
@@ -67,6 +67,78 @@ ul li {
     color: #333333;
     background: url("images/arrow3.gif") no-repeat 5px 50%;
 }
+
 #header ul li a:hover {
     background: #ffcc00 url("images/arrow4.gif") no-repeat 5px 50%;
+}
+
+#header .login {
+    float: right;
+    width: 35px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+#login {
+    width: 350px;
+    height: 250px;
+    border: 1px solid #cccccc;
+    position: absolute;
+    display: none;
+}
+
+#login h2 {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #666666;
+    background: url("images/login_header.png") repeat-x;
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
+    margin: 0 0 20px 0;
+}
+
+#login h2 img {
+    float: right;
+    position: relative;
+    top: 14px;
+    right: 8px;
+    cursor: pointer;
+}
+
+#login div.user, #login div.pass {
+    font-size: 14px;
+    color: #666666;
+    padding: 5px 0;
+    text-align: center;
+}
+
+#login input.text {
+    width: 200px;
+    height: 25px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    font-size: 14px;
+}
+
+#login .button {
+    text-align: center;
+    padding: 20px 0;
+}
+
+#login input.submit {
+    width: 107px;
+    height: 30px;
+    background: url("images/login_button.png") no-repeat;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+#login .other {
+    text-align: right;
+    padding: 15px 10px;
+    color: #666666;
 }
