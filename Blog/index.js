@@ -1,3 +1,6 @@
+var LOGIN_WIDTH = 350;
+var LOGIN_HEIGHT = 250;
+
 window.onload = function () {
 
     //个人中心下拉菜单
@@ -11,13 +14,21 @@ window.onload = function () {
 
     //登录框
     var login = $().getId('login');
-    login.center(350, 250).resize(function () {
-        login.center(350, 250);
+    var screen = $().getId('screen');
+    login.center(LOGIN_WIDTH, LOGIN_HEIGHT).resize(function () {
+        login.center(LOGIN_WIDTH, LOGIN_HEIGHT);
+        if(login.css('display') == 'block') {
+            screen.lock();
+        }
     });
     $().getClassName('login').click(function () {
         login.css('display', 'block');
+        screen.lock();
     });
     $().getClassName('close').click(function () {
         login.css('display', 'none');
+        screen.unlock();
     });
+
+
 };

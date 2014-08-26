@@ -80,12 +80,27 @@ ul li {
     cursor: pointer;
 }
 
+#screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 500px;*/
+    /*height: 500px;*/
+    background: #000000;
+    z-index: 9998;
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+    display: none;
+}
+
 #login {
     width: 350px;
     height: 250px;
     border: 1px solid #cccccc;
     position: absolute;
     display: none;
+    z-index: 9999;
+    background: #ffffff;
 }
 
 #login h2 {
