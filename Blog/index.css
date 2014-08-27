@@ -84,11 +84,8 @@ ul li {
     position: absolute;
     top: 0;
     left: 0;
-    /*width: 500px;*/
-    /*height: 500px;*/
     background: #000000;
     z-index: 9998;
-    filter: alpha(opacity=30);
     opacity: 0.3;
     display: none;
 }
@@ -114,6 +111,7 @@ ul li {
     padding: 0;
     border-bottom: 1px solid #cccccc;
     margin: 0 0 20px 0;
+    cursor: move;
 }
 
 #login h2 img {

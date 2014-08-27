@@ -44,3 +44,18 @@ function removeRule(sheet, index) {
         sheet.removeRule(index);
     }
 }
+
+//获取Event对象
+function getEvent(evt) {
+    return evt||window.event;
+}
+
+//取消默认行为
+function preventDefault(evt) {
+    var event = getEvent(evt);
+    if (typeof event.preventDefault != 'undefined') {   //W3C
+        event.preventDefault();
+    } else {    //IE
+        event.returnValue = false;
+    }
+}

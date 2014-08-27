@@ -163,7 +163,18 @@ Base.prototype.center = function (width, height) {
 
 //触发浏览器窗口事件
 Base.prototype.resize = function (func) {
-    window.onresize = func;
+    for (var i = 0; i < this.elements.length; i ++) {
+        var element = this.elements[i];
+        window.onresize = function () {
+            func();
+            if (element.offsetLeft > getInner().width - element.offsetWidth) {
+                element.style.left = getInner().width - element.offsetWidth + 'px';
+            }
+            if (element.offsetTop > getInner().height - element.offsetHeight) {
+                element.style.top = getInner().height - element.offsetHeight + 'px';
+            }
+        };
+    }
     return this;
 };
 
@@ -173,15 +184,51 @@ Base.prototype.lock = function () {
         this.elements[i].style.width = getInner().width + 'px';
         this.elements[i].style.height = getInner().height + 'px';
         this.elements[i].style.display = 'block';
+        document.documentElement.style.overflow = 'hidden';
     }
     return this;
 };
 
-
-//
 Base.prototype.unlock = function () {
     for (var i = 0; i < this.elements.length; i ++) {
         this.elements[i].style.display = 'none';
+        document.documentElement.style.overflow = 'auto';
+    }
+    return this;
+};
+
+//拖拽功能
+Base.prototype.drag = function () {
+    for (var i = 0; i < this.elements.length; i ++) {
+        this.elements[i].onmousedown = function (evt) {
+            preventDefault(evt);
+            var event = getEvent(evt);
+            var _this = this;
+            var diffX = event.clientX - _this.offsetLeft;
+            var diffY = event.clientY - _this.offsetTop;
+
+            document.onmousemove = function (evt) {
+                var event = getEvent(evt);
+                var left = event.clientX - diffX;
+                var top = event.clientY - diffY;
+                if (left < 0) {
+                    left = 0;
+                } else if (left > getInner().width - _this.offsetWidth) {
+                    left = getInner().width - _this.offsetWidth;
+                }
+                if (top < 0) {
+                    top = 0;
+                } else if (top > getInner().height - _this.offsetHeight) {
+                    top = getInner().height - _this.offsetHeight;
+                }
+                _this.style.left = left + 'px';
+                _this.style.top = top + 'px';
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
     }
     return this;
 };

@@ -16,12 +16,12 @@ window.onload = function () {
     var login = $().getId('login');
     var screen = $().getId('screen');
     login.center(LOGIN_WIDTH, LOGIN_HEIGHT).resize(function () {
-        login.center(LOGIN_WIDTH, LOGIN_HEIGHT);
         if(login.css('display') == 'block') {
             screen.lock();
         }
     });
     $().getClassName('login').click(function () {
+        login.center(LOGIN_WIDTH, LOGIN_HEIGHT);
         login.css('display', 'block');
         screen.lock();
     });
@@ -30,5 +30,6 @@ window.onload = function () {
         screen.unlock();
     });
 
-
+    //登陆框拖拽
+    login.drag();
 };
