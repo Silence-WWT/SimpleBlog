@@ -59,3 +59,56 @@ function preventDefault(evt) {
         event.returnValue = false;
     }
 }
+
+//跨浏览器事件绑定
+function addEvent(object, type, func) {
+    if (typeof object.addEventListener != 'undefined') {    //W3C
+        object.addEventListener(type, func, false);
+    } else if (typeof object.attachEvent != 'undefined') {  //IE
+//        object.attachEvent('on' + type, function () {
+//            func.call(object, window.event);
+//        });
+        if (!object.events) object.events = {};
+        if (!object.events[type]) {
+            object.events[type] = [];
+            if (object['on' + type]) object.events[type][0] = func;
+        } else {
+            if (addEvent.equal(object[type], func)) return false;
+        }
+
+        object.events[type][addEvent.ID++] = func;
+        object['on' + type] = addEvent.exec;
+
+    }
+}
+
+addEvent.ID = 1;
+
+addEvent.exec = function (evt) {
+    var event = getEvent(evt);
+    var events = this.events[event.type];
+    for (var i = 0; i < events.length; i++) {
+        events[i].call(this, event);
+    }
+};
+
+//同一个注册函数进行屏蔽
+addEvent.equal = function (events, func) {
+    for (var i = 0; i < events.length; i++) {
+        if (events[i] = func) return true;
+    }
+};
+
+//跨浏览器移除事件
+function removeEvent (object, type, func) {
+    if (typeof object.removeEventListener != 'undefined') {     //W3c
+        object.removeEventListener(type, func, false);
+    } else if (typeof object.detachEvent != 'undefined') {      //IE
+//        object.detachEvent('on' + type, func);
+        for (var i = 0; i< object.events[type].length; i++) {
+            if (object.events[type][i] == func) {
+                delete  object.events[type][i];
+            }
+        }
+    }
+}
